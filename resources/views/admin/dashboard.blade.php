@@ -20,7 +20,7 @@
                     {{ __('You are logged in!') }}
 
                     <div>
-                        Benvenuto {{$user->name}}
+                        
                     </div>
                 </div>
             </div>
