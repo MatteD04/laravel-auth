@@ -15,6 +15,11 @@
     <div>
         <strong>Created at</strong>: {{ $project->created_at }}
     </div>
+    @if ($project->cover_image)
+        <div>
+            <img src="{{ asset('storage/' . $project->cover_image) }}">
+        </div>
+    @endif
     <div>
         <strong>Summary:</strong>
         <p>{{ $project->summary ? $project->summary : 'Non presente' }}</p>
