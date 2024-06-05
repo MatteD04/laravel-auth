@@ -42,10 +42,10 @@ class ProjectController extends Controller
     {
         $formData = $request->all();
 
+        //salva l'immagine nella cartella
         if($request->hasFile('cover_image')) {
             
             $img_path = Storage::disk('public')->put('project_images', $formData['cover_image']);
-            
             $formData['cover_image'] = $img_path;
         }
 
@@ -89,6 +89,17 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         $formData = $request->all();
+
+        if($request->hasFile('cover_image')) {
+            //elimina immagine che già c'era
+            if($post->cover_image) {
+                Storage::delete($post->cover_image);
+            }
+
+            //aggiunge la nuova immagine
+            $img_path = Storage::disk('public')->put('project_images', $formData['cover_image']);
+            $formData['cover_image'] = $img_path;
+        }
 
         $project->slug = Str::slug($formData['name'], '-');
         $project->update($formData);
